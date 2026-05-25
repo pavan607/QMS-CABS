@@ -1,7 +1,6 @@
 # Dependencies
 /node_modules
-# Local npm cache for offline installs (run npm run vendor:npm-cache while online, then copy this folder)
-.npm-offline-cache
+# Local npm cache: bundled in repo for air-gapped installs (refresh with npm run vendor:npm-cache)
 /.pnp
 .pnp.js
 
