@@ -2,8 +2,8 @@ QMS — OFFLINE npm install (defence / air-gapped network)
 ====================================================
 
 IMPORTANT: npm install must NOT use the internet. The project ships a local
-cache folder .npm-offline-cache (not in git). You must build that cache once
-on a connected machine, then copy the whole project to the target site.
+cache folder .npm-offline-cache (included in git). Refresh with vendor:npm-cache
+on a connected machine if package-lock.json changes, then copy or git pull on the target site.
 
 --- ON CONNECTED MACHINE (once, before transfer) ---
 
