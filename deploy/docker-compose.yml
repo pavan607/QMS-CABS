@@ -1,0 +1,26 @@
+# Customer runtime: PostgreSQL is external (set DATABASE_URL in .env).
+# Uploads persist on the host — set UPLOADS_HOST_PATH to a directory outside the container.
+#
+# 1. docker load -i qms-image.tar   (if you received a saved image)
+# 2. mkdir -p "$UPLOADS_HOST_PATH" && sudo chown -R 1001:1001 "$UPLOADS_HOST_PATH"
+# 3. cp env.example .env && edit .env   (or: cp .env.docker .env)
+# 4. docker compose up -d
+
+services:
+  qms:
+    image: qms:latest
+    container_name: qms
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "${HTTP_PORT:-3000}:3000"
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      AUTH_TRUST_HOST: "true"
+      DOCKER_PG_HOST: host.docker.internal
+    volumes:
+      # Host directory (outside the container). Override in .env, e.g. /var/lib/qms/uploads
+      - ${UPLOADS_HOST_PATH:-./uploads}:/app/public/uploads
